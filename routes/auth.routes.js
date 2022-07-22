@@ -17,8 +17,14 @@ router.post('/signup', (req, res, next) => {
 		res.status(400).json({ message: 'Rellena todos los campos.' });
 		return;
 	}
+	//check if password is equal as passwordRepeat
 	if (password !== repeatPassword){
 		res.status(400).json({ message: 'Las contraseñas no coinciden.' });
+		return;
+	}
+	//check if telefono is valid
+	if(telefono.length <= 8){
+		res.status(400).json({ message: 'Numero de telefono no valido' });
 		return;
 	}
 
@@ -79,7 +85,7 @@ router.post('/login', (req, res, next) => {
 
 	// Check if email or password are provided as empty string
 	if (email === '' || password === '') {
-		res.status(400).json({ message: 'Provide email and password.' });
+		res.status(400).json({ message: 'Rellena todos los campos' });
 		return;
 	}
 
@@ -88,7 +94,7 @@ router.post('/login', (req, res, next) => {
 		.then((foundUser) => {
 			if (!foundUser) {
 				// If the user is not found, send an error response
-				res.status(407).json({ message: 'User not found.' });
+				res.status(400).json({ message: 'Usuario no encontrado' });
 				return;
 			}
 
@@ -108,7 +114,7 @@ router.post('/login', (req, res, next) => {
 				// Send the token as the response
 				res.status(200).json({ authToken: authToken });
 			} else {
-				res.status(401).json({ message: 'Unable to authenticate the user' });
+				res.status(401).json({ message: 'Contraseña incorrecta' });
 			}
 		})
 		.catch((err) => res.status(500).json({ message: 'Internal Server Error' }));
