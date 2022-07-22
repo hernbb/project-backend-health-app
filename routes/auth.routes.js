@@ -10,18 +10,22 @@ const saltRounds = 10;
 
 // POST /signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
-	const { email, password, name } = req.body;
+	const { email, password, name, dni, telefono, repeatPassword } = req.body;
 
 	// Check if email or password or name are provided as empty string
-	if (email === '' || password === '' || name === '') {
-		res.status(400).json({ message: 'Provide email, password and name' });
+	if (email === '' || password === '' || name === '' || dni === '' || telefono === '' || repeatPassword === '') {
+		res.status(400).json({ message: 'Rellena todos los campos.' });
+		return;
+	}
+	if (password !== repeatPassword){
+		res.status(400).json({ message: 'Las contraseñas no coinciden.' });
 		return;
 	}
 
 	// Use regex to validate the email format
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 	if (!emailRegex.test(email)) {
-		res.status(400).json({ message: 'Provide a valid email address.' });
+		res.status(400).json({ message: 'Coloca un email valido.' });
 		return;
 	}
 
@@ -30,7 +34,7 @@ router.post('/signup', (req, res, next) => {
 	if (!passwordRegex.test(password)) {
 		res.status(400).json({
 			message:
-				'Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.'
+				'La contraseña debe tener al menos 6 caracteres con al menos un numero, una minúscula y una mayúscula.'
 		});
 		return;
 	}
@@ -40,7 +44,7 @@ router.post('/signup', (req, res, next) => {
 		.then((foundUser) => {
 			// If the user with the same email already exists, send an error response
 			if (foundUser) {
-				res.status(400).json({ message: 'User already exists.' });
+				res.status(400).json({ message: 'El usuario ya existe' });
 				return;
 			}
 
