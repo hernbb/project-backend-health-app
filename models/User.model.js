@@ -7,7 +7,12 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   dni: { type: String, unique: true, required: true },
   telefono: { type: String, unique: true, required: true },
-  
+  country: {type:String},
+  address1:{type:String},
+  address2:{type:String},
+  city:{type:String},
+  province:{type:String},
+  zipCode: { type:String}
 });
 
 module.exports = model("User", userSchema);
