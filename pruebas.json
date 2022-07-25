@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Chequeo Salud y Bienestar",
+    "description": "Estudio de diferentes parámetros que pueden verse alterados por nuestro estilo de vida",
+    "price": 60
+  },
+  {
+    "title": "Perfil Hombre",
+    "description": "Evaluación analítica completa de parámetros clave para conocer el estado de salud general del hombre",
+    "price": 75
+  },
+
+  {
+    "title": "Perfil Mujer",
+    "description": "Evaluación analítica completa de parámetros clave para conocer el estado de salud general de la mujer",
+    "price": 75
+  },
+
+  {
+    "title": "Test Antigeno",
+    "description": "Análisis de la existencia de infección por SARS-CoV-2",
+    "price": 25
+  },
+
+  {
+    "title": "PCR Saliva",
+    "description": "Análisis de la existencia de infección por SARS-CoV-2",
+    "price": 50
+  }
+]

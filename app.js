@@ -16,11 +16,11 @@ app.use("/api", allRoutes);
 const authRouter = require("./routes/auth.routes");
 app.use("/api/auth", authRouter);
 
-// const pruebasRouter = require("./routes/pruebas.routes");
-// app.use("/pruebas",isAuthenticated, pruebasRouter);           
+const pruebasRouter = require("./routes/pruebas.routes");
+app.use("/api/pruebas",isAuthenticated, pruebasRouter);           
 
-const projectRouter = require("./routes/project.routes");
-app.use("/", isAuthenticated, projectRouter);            // <== UPDATE
+const profileRouter = require("./routes/profile.routes");
+app.use("/", isAuthenticated, profileRouter);            // <== UPDATE
 
 const taskRouter = require("./routes/task.routes");
 app.use("/api",isAuthenticated, taskRouter);            // <== UPDATE
