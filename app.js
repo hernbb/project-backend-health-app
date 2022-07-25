@@ -16,8 +16,11 @@ app.use("/api", allRoutes);
 const authRouter = require("./routes/auth.routes");
 app.use("/api/auth", authRouter);
 
+// const pruebasRouter = require("./routes/pruebas.routes");
+// app.use("/pruebas",isAuthenticated, pruebasRouter);           
+
 const projectRouter = require("./routes/project.routes");
-app.use("/api", isAuthenticated, projectRouter);            // <== UPDATE
+app.use("/", isAuthenticated, projectRouter);            // <== UPDATE
 
 const taskRouter = require("./routes/task.routes");
 app.use("/api",isAuthenticated, taskRouter);            // <== UPDATE

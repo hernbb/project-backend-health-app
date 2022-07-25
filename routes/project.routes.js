@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const User = require('../models/User.model');
 
-const Project = require('../models/Project.model');
+
 
 //  POST /api/projects  -  Creates a new project
 router.post('/projects', (req, res, next) => {
@@ -15,7 +16,9 @@ router.post('/projects', (req, res, next) => {
 
 //  GET /api/projects -  Retrieves all of the projects
 router.get('/projects', (req, res, next) => {
-	Project.find().populate('tasks').then((allProjects) => res.json(allProjects)).catch((err) => res.json(err));
+	Project.find().populate('tasks')
+	.then((allProjects) => res.json(allProjects))
+	.catch((err) => res.json(err));
 });
 
 //  GET /api/projects/:projectId -  Retrieves a specific project by id
@@ -66,5 +69,46 @@ router.delete('/projects/:projectId', (req, res, next) => {
 		)
 		.catch((error) => res.json(error));
 });
+
+router.get('/api/profile', (req,res, next) => {
+	User.findById(req.payload._id)
+	console.log(req.payload._id)
+	.then((response) => {
+		res.status(200).json(response)
+	})
+	.catch((err) => {
+		console.log(err);
+		res.status(500).json({ message: 'Internal Server Error' });
+	});
+})
+
+router.post('/api/profile', (req, res, next) => {
+	console.log(req.payload._id)
+	console.log(req.body)
+	const {address1, address2, city, country, province, zipCode } = req.body;
+	console.log(req.body)
+	User.findByIdAndUpdate(req.payload._id,{
+		
+		address1:address1,
+		address2:address2,
+		city:city,
+		country:country,
+		province:province,
+		zipCode: zipCode
+	},
+	{ new: true })
+	.then((userUpdate) => {
+		
+		// Send a json response containing the user object
+		res.status(201).json({ user: userUpdate , message: 'Updated successfully' });
+		
+	})
+	.catch((err) => {
+		console.log(err);
+		res.status(500).json({ message: 'Internal Server Error' });
+	});
+
+})
+
 
 module.exports = router;
