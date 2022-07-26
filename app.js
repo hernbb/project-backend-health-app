@@ -20,7 +20,10 @@ const pruebasRouter = require("./routes/pruebas.routes");
 app.use("/api/pruebas",isAuthenticated, pruebasRouter);           
 
 const profileRouter = require("./routes/profile.routes");
-app.use("/", isAuthenticated, profileRouter);            // <== UPDATE
+app.use("/api/profile", isAuthenticated, profileRouter); 
+
+const carritoRouter = require("./routes/pruebas.routes");
+app.use("/api/carrito", isAuthenticated, carritoRouter);  
 
 const taskRouter = require("./routes/task.routes");
 app.use("/api",isAuthenticated, taskRouter);            // <== UPDATE

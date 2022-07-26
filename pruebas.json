@@ -26,5 +26,20 @@
     "title": "PCR Saliva",
     "description": "Análisis de la existencia de infección por SARS-CoV-2",
     "price": 50
+  },
+  {
+    "title": "Test prenatal",
+    "description": "Test de cribado prenatal genético no invasivo",
+    "price": 250
+  },
+  {
+    "title": "Test deportivo avanzado",
+    "description": "Estudio genético y bioquímico para un entrenamiento personalizado",
+    "price": 230
+  },
+  {
+    "title": "Perfil Cardiovascular",
+    "description": "Evaluación de riesgo cardiovascular",
+    "price": 40
   }
 ]
