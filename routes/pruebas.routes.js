@@ -29,11 +29,17 @@ router.get('/', (req, res, next) => {
 router.post('/add-pruebas', (req, res, next) => {
     const { idPruebas, idUser } = req.body
     // console.log(req.body)
-    User.findByIdAndUpdate(idUser, { $push: { pruebas: idPruebas } })
-        .then((response) => res.status(200).json({ response, message: 'añadido y guardado' }))
-        .catch((err) => res.json(err))
-})
+    User.findById(idUser)
+    .then((user) => {
+        if (!user.pruebas.includes(idPruebas)) {
+            User.findByIdAndUpdate(idUser, { $push: { pruebas: idPruebas} })
 
+            .then((response) => res.status(200).json({ response, message: 'añadido y guardado' }))
+
+        }
+    })
+    .catch((err) => res.json(err))
+})
 
 router.get('/api/carrito', (req, res, next) => {
     const {_id} = req.payload
