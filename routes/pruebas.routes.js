@@ -33,10 +33,11 @@ router.post('/add-pruebas', (req, res, next) => {
     .then((user) => {
         if (!user.pruebas.includes(idPruebas)) {
             User.findByIdAndUpdate(idUser, { $push: { pruebas: idPruebas} })
-
             .then((response) => res.status(200).json({ response, message: 'añadido y guardado' }))
+        }else{
 
         }
+
     })
     .catch((err) => res.json(err))
 })
@@ -52,7 +53,7 @@ router.get('/api/carrito', (req, res, next) => {
 
 
 
-router.post("/api/carrito", (req, res) => {
+router.post("/api/carrito", (req, res, next) => {
     const { idPruebas, idUser } = req.body
 
  console.log(idPruebas)
@@ -69,5 +70,12 @@ router.post("/api/carrito", (req, res) => {
     //     .catch((err) => res.json(err));
 });
 
+router.put("/api/carrito", ( req, res, next) => {
+    const { idUser } = req.body
+    console.log(idUser)
+    User.findByIdAndUpdate(idUser, { $set: { pruebas: [] } })
+    .then((response) => res.status(200).json({ response, message: 'actualizado y guardado' }))
+    .catch((err) => res.json(err))
+})
 
 module.exports = router;
