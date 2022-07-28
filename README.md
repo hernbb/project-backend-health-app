@@ -2,7 +2,8 @@
 
 #### Instala dependencias
 - npm i
-#### Crea archivo .env y agrega variables de entorno
+- npm run dev
+<!-- #### Crea archivo .env y agrega variables de entorno
 ![.env](https://user-images.githubusercontent.com/14861253/170860925-8da6984f-791a-4f9a-8747-d7e4a4917310.png)
 - crea un archivo .env en la raíz del proyecto con las siguientes variables de entorno: <br>
   - TOKEN_SECRET = super-secret-password <br>
@@ -20,7 +21,7 @@
 - TOKEN_SECRET = super-secret-password
 - MONGODB_URI=mongodb+srv://user:password.@redone.w7gjz.mongodb.net/?retryWrites=true&w=majority 
 
----
+--- -->
 
 ### API Documentation
 
@@ -28,23 +29,23 @@ We will start our project by first documenting all of the routes and data models
 
 #### Routes
 
-##### Project routes
+##### Profile routes
 
-| HTTP verb | URL                        | Request body | Action                        |
-| --------- | -------------------------- | ------------ | ----------------------------- |
-| GET       | `/api/projects`            | (empty)      | Returns all the projects      |
-| POST      | `/api/projects`            | JSON         | Adds a new project            |
-| GET       | `/api/projects/:projectId` | (empty)      | Returns the specified project |
-| DELETE    | `/api/projects/:projectId` | (empty)      | Deletes the specified project |
+| HTTP verb | URL                        | Request body | Action                          |
+| --------- | -------------------------- | ------------ | ------------------------------- |
+| GET       | `/api/profile`             | JSON         | Returns the user profile by Id  |
+| POST      | `/api/profile`             | JSON         | Update profile                  |
 
-##### Task routes
+##### Pruebas routes
 
-| HTTP verb | URL                  | Request body | Action                     |
-| --------- | -------------------- | ------------ | -------------------------- |
-| POST      | `/api/tasks`         | JSON         | Adds a new task            |
-| GET       | `/api/tasks/:taskId` | (empty)      | Returns the specified task |
-| PUT       | `/api/tasks/:taskId` | JSON         | Edits the specified task   |
-| DELETE    | `/api/tasks/:taskId` | (empty)      | Deletes the specified task |
+| HTTP verb | URL                  | Request body | Action                      |
+| --------- | -------------------- | ------------ | --------------------------  |
+| POST      | `/`                  | JSON         | Create prueba               |
+| GET       | `/`                  | JSON         | Find all pruebas            |
+| POST      | `/add-pruebas`       | JSON         | Push pruebas to user        |
+| GET       | `/api/carrito`       | JSON         | Print all pruebas user have |
+| POST      | `/api/carrito`       | JSON         | Deletes the specified prueba|
+| PUT       | `/api/carrito`       | JSON         | Set user pruebas empty      |
 
 ##### Auth routes
 
@@ -60,33 +61,33 @@ We will start our project by first documenting all of the routes and data models
 
 #### Models
 
-##### Project Model
+
+##### Pruebas Model
 
 ```js
 {
-  title: String,
-  description: String,
-  tasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ]
-}
-```
-
-##### Task Model
-
-```js
-{
-  title: String,
-  description: String,
-  project: { type: Schema.Types.ObjectId, ref: 'Project' }
-}
+    title: String,
+    description: String,
+    price: Number
+  }
 ```
 
 ##### User Model
 
 ```js
 {
-  email: { type: String, unique: true, required: true },
+  email: { type: String, required: true },
   password: { type: String, required: true },
   name: { type: String, required: true },
+  dni: { type: String, unique: true, required: true },
+  telefono: { type: String, unique: true, required: true },
+  country: { type: String, default: ""},
+  address1: { type: String, default: ""},
+  address2: { type: String, default: ""},
+  city: { type: String, default: ""},
+  province: { type: String, default: ""},
+  zipCode: { type: String, default: ""},
+  pruebas: [{ type: Schema.Types.ObjectId, ref: "Pruebas" }]
 }
 ```
 

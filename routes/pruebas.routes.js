@@ -19,13 +19,6 @@ router.get('/', (req, res, next) => {
         .catch((err) => res.json(err));
 });
 
-// router.get('/pruebas/:_id', (req, res, next)=>{
-//     const {id} = req.body
-//     console.log(req.body)                                               //consulta
-//     Pruebas.findById({_id:id })
-//     .then((response) => res.status(200).json({response}))
-// })
-
 router.post('/add-pruebas', (req, res, next) => {
     const { idPruebas, idUser } = req.body
     // console.log(req.body)
@@ -34,8 +27,6 @@ router.post('/add-pruebas', (req, res, next) => {
         if (!user.pruebas.includes(idPruebas)) {
             User.findByIdAndUpdate(idUser, { $push: { pruebas: idPruebas} })
             .then((response) => res.status(200).json({ response, message: 'añadido y guardado' }))
-        }else{
-
         }
 
     })
@@ -56,8 +47,8 @@ router.get('/api/carrito', (req, res, next) => {
 router.post("/api/carrito", (req, res, next) => {
     const { idPruebas, idUser } = req.body
 
- console.log(idPruebas)
- console.log(idUser)
+//  console.log(idPruebas)
+//  console.log(idUser)
  
 
     User.findByIdAndUpdate(idUser, { $pull: { pruebas: idPruebas } })
